@@ -39,7 +39,14 @@
              <div class="col-md-5 form_responsive_register">
                <div class="card card_shadow" style="position: relative;top: 35px; padding: 20px;">
                   <h2 id="signin" >Sign Up</h2>
-                  <h6 id="new_user">Already a Member? <a href="{{url('login_page')}}" style="color: blue; " id="account">Sign In</a></h6>  
+                  <h6 id="new_user">Already a Member? <a href="{{url('login_page')}}" style="color: blue; " id="account">Sign In</a></h6>
+                   <div class="flash-message">
+                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                    @if(Session::has('alert-' . $msg))
+                        <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                    @endif
+                @endforeach
+            </div>  
                 <div class="card-body">
                     <form method="post" action="{{url('/registering_user')}}">
                         @csrf
@@ -77,16 +84,16 @@
                           <hr>
                          <br>
 
+                         <!-- <a href="{{ url('auth/google') }}" class="btn btn-google btn-user btn-block col-sm-10 input">
+                        <i class="fab fa-google fa-fw"></i> Login with Github
+                        </a> -->
+
                         <a href="" class="btn btn-google btn-user btn-block col-sm-10 input">
                         <i class="fab fa-google fa-fw"></i> Login with Google
                         </a>
 
                         <a href="index.html" class="btn btn-facebook btn-user btn-block col-sm-10 input">
                         <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                        </a>
-
-                        <a href="index.html" class="btn btn-github btn-user btn-block col-sm-10 input">
-                        <i class="fab fa-github fa-fw"></i> Login with Github
                         </a>
                     </form>
                 </div>

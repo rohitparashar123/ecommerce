@@ -4,7 +4,7 @@
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <title>@yield('page_title')</title>
-      <link rel="icon" href="../images/adminn.png" type="image/gif" sizes="128x128">
+      <link rel="icon" href="{{asset('../images/favicon.png')}}" type="image/gif" sizes="128x128">
       <!-- Tell the browser to be responsive to screen width -->
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <!-- Font Awesome -->
@@ -43,12 +43,12 @@
          text-decoration: underline;
         }
 
-        [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
-             background-color: rgba(255,255,255,.9);
-             color: #343a40;
+       #dashboard_color{
+            background-color: #007bff;
+             color: #fff;
            /*  background-color: black;
              color: white;
-*/         }
+*/      }
          .nav-link.active:hover{
             background-color:  #f33535!important;
             border-color:  #f33535!important;
@@ -68,6 +68,8 @@
             color: red;
 
          }
+
+            
         
       </style>
    </head>
@@ -118,7 +120,7 @@
                   <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                   <li class="nav-item has-treeview menu-open">
-                     <a href="#" class="nav-link active">
+                     <a href="#" class="nav-link" id="dashboard_color">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                            Dashboard
@@ -126,35 +128,35 @@
                         </p>
                      </a>
                      <ul class="nav nav-treeview">
-                        <li class="nav-item">
+                        <li class="nav-item active">
                            <a href="{{url('admin/category/add_category')}}" class="nav-link active">
                               <i class="far fa-list nav-icon"></i>
                               <p> Add Category</p>
                            </a>
                         </li>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active">
                            <a href="{{url('admin/product')}}" class="nav-link active">
                               <i class="fas fa-shopping-cart nav-icon"></i>
                               <p>Add Product</p>
                            </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active">
                            <a href="{{url('admin/coupon')}}" class="nav-link active">
                               <i class="fas fa-tag nav-icon"></i>
                               <p>Add Coupon</p>
                            </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active">
                            <a href="{{url('admin/banner')}}" class="nav-link active">
                               <i class="fas fa-images nav-icon"></i>
                               <p>Add Banner</p>
                            </a>
                         </li>
-                        <li class="nav-item">
-                           <a href="{{url('admin/banner')}}" class="nav-link active">
-                              <i class="fas fa-images nav-icon"></i>
-                              <p>Order</p>
+                        <li class="nav-item active">
+                           <a href="{{url('/orders')}}" class="nav-link active">
+                             <i class="fas fa-hamburger nav-icon"></i>
+                              <p> Orders</p>
                            </a>
                         </li>
                      </ul>

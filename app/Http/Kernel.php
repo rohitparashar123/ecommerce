@@ -48,6 +48,12 @@ class Kernel extends HttpKernel
 
              \App\Http\Middleware\AdminAuth::class,
         ],
+
+        'front_auth' => [
+
+             \App\Http\Middleware\FrontAuth::class,
+        ],
+        
     ];
 
     /**
@@ -68,5 +74,6 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        
     ];
 }

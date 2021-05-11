@@ -166,7 +166,7 @@
                                            
                                         </tr>
                                     </thead>
-                                     @foreach($order as $product)
+                                     @foreach($data as $product)
                                     <tbody>
                                         <tr>
                                             <td>{{$product->id}}</td>
@@ -193,7 +193,7 @@
                                            
                                         </tr>
                                     </thead>
-                                     @foreach($order as $address)
+                                     @foreach($data as $address)
                                     <tbody>
                                         <tr>
                                             <td>{{$address->id}}</td>
@@ -214,10 +214,11 @@
                     <div class="tab-pane fade" id="account-info" role="tabpanel">
                         <div class="myaccount-content">
                             <h3>Account Details</h3>
-
+                             <form action="{{url('/change-password')}}" method="post">
+                                      @csrf 
                             <div class="account-details-form">
-                                <form action="#">
-                                    <div class="row">
+                                    <div class="row"> 
+                                     
                                         <div class="col-lg-6 col-12 mb-30">
                                             <label class="mb-2 label_text">Full Name</label>
                                             <input id="display-name" placeholder="Full Name" type="text" value="{{Auth::user()->name}}">
@@ -231,27 +232,26 @@
                                         <div class="col-12 mb-30">
                                             <h4>Password change</h4>
                                         </div>
-
                                         <div class="col-12 mb-30">
                                             <label class="mb-2 label_text">Current Password</label>
-                                            <input id="myInput" placeholder="Current Password" type="password" value="{{Auth::user()->password}}">
+                                            <input id="myInput" placeholder="Current Password" type="password" name="old_password">
                                              <span onclick="myFunction()" class="fa fa-eye eye_position" style="color: black;"></span>
                                         </div>
 
                                         <div class="col-lg-6 col-12 mb-30">
-                                            <input id="new-pwd" placeholder="New Password" type="password">
+                                            <input id="new-pwd" name="new_password" type="password">
                                         </div>
 
                                         <div class="col-lg-6 col-12 mb-30">
-                                            <input id="confirm-pwd" placeholder="Confirm Password" type="password">
+                                            <input id="confirm-pwd" name="confirm_password" type="password">
                                         </div>
 
                                         <div class="col-12">
-                                            <button type="" class="btn theme-btn--dark1 btn--md">Save Changes</button>
-                                        </div>
+                                            <button type="submit" class="btn theme-btn--dark1 btn--md">Save Changes</button>
                                     </div>
-                                </form>
+                                </div>
                             </div>
+                            </form>
                         </div>
                     </div>
                     <!-- Single Tab Content End -->

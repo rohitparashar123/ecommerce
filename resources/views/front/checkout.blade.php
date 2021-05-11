@@ -150,6 +150,10 @@
                                     <input type="radio" id="test7" name="payment_method" value="Cash on delivery">
                                     <label for="test7">Pay by Cash on Delivery</label>
                                 </div>
+                                <div class="custom-radio mb-4">
+                                     <input type="radio" id="test7" name="payment_method" value="paytm">
+                                    <label><a href="/payment">Paytm</a></label>
+                                </div>
                                 <div class="filter-check-box mb-4">
                                     <input type="checkbox" id="20828" required="">
                                     <label class="checkout" for="20828">I agree to the terms and Conditions</label>

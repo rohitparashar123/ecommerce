@@ -32,7 +32,7 @@
     color: green;
 }
 
-    </style>
+</style>
 <div class="container-fluid body_login">
     <div class="row">
         <div class="col-md-6 display_none">
@@ -56,9 +56,8 @@
                @endif
               </span>
                 <div class="card-body">
-                    <form method="POST" action="{{url('/login_user') }}">
+                    <form method="POST" action="{{route('front.dologin') }}">
                         @csrf
-
                         <div class="form-group">
 
                            
@@ -96,25 +95,34 @@
                                     Login
                                 </button>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link_forget_password " id="forget_password" href="{{ route('password.request') }}">
+                                
+                                    <a class="btn btn-link_forget_password" id="forget_password" href="{{ url('/forget_password') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
-                                @endif
                                 <hr>
                          <br>
                            
-                         <a href="" class="btn btn-google btn-user btn-block col-sm-10 input">
+                         <a href="{{ url('auth/google') }}" class="btn btn-google btn-user btn-block col-sm-10 input">
                         <i class="fab fa-google fa-fw"></i> Login with Google
                         </a>
 
-                        <a href="index.html" class="btn btn-facebook btn-user btn-block col-sm-10 input">
+                        
+                        <!-- <a href="" class="btn btn-google btn-user btn-block col-sm-10 input">
+                        <i class="fab fa-google fa-fw"></i> Login with Google
+                        </a> -->
+                        
+                       <!--  <a href="" class="btn btn-facebook btn-user btn-block col-sm-10 input">
+                        <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                        </a> 
+ -->
+
+                        <a href="{{ url('auth/facebook') }}" class="btn btn-facebook btn-user btn-block col-sm-10 input">
                         <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
                         </a>
 
-                        <a href="index.html" class="btn btn-github btn-user btn-block col-sm-10 input">
+                        <!-- <a href="{{ url('/auth/redirect/github') }}" class="btn btn-github btn-user btn-block col-sm-10 input">
                         <i class="fab fa-github fa-fw"></i> Login with Github
-                        </a>
+                        </a> -->
                     </form>
                 </div>
             </div>

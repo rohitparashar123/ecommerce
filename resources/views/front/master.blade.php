@@ -5,6 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
       <meta name="description" content="" />
+       <meta name="csrf-token" content="{{ csrf_token() }}">
       <title>@yield('title')</title>
       <!-- Favicon -->
       <link rel="shortcut icon" type="image/x-icon" href="{{asset('../images/favicon.png')}}" />
@@ -24,6 +25,11 @@
       <link rel="stylesheet" href="{{asset('../css/style.css')}}" />
        <!-- Toaster Notification -->
       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+      <!-- prevent back button after logout -->
+    
+      <!-- prevent back button after logout -->
+      
       <!-- Use the minified version files listed below for better performance and remove the files listed above -->
       <!--**************************** 
          Minified  css 
@@ -41,7 +47,7 @@
                 left: 105px;
            }
            .background_color{
-            /*background-color: #cdd012;*/
+            background: linear-gradient(to right, #dfeae7, #F0F2F0);
            }
            footer:after {
               position: absolute;
@@ -50,8 +56,37 @@
               width: calc(35% + 33px);
               height: 100%;
               content: "";
-              background-color: #cdd012;
+              /*background: url(../images/footer.png);*/
+              background: linear-gradient(#dfeae7, #F0F2F0);
               z-index: 1;
+              }
+
+              /*.footer-menu li a {
+                font-size: 14px;
+                line-height: 24px;
+                text-transform: capitalize;
+                color: #fff;
+              }*/
+              /*.theme2 .footer-menu li a:hover{
+                color: black;
+              }*/
+              .login_btn{
+                color: #3e64ff!important;
+                padding-top: 10px!important;
+                padding-bottom: 10px!important;
+                padding-right: 25px!important;
+                padding-left: 25px!important;
+                border-radius: 30px!important;
+                font-size: 15px!important;
+               border: none!important;
+                box-shadow: 2px 2px 5px #babecc, -5px -5px 10px hsl(0deg 0% 100% / 45%);
+                outline: none!important;
+              }
+              .login_btn:focus{
+                
+                box-shadow: inset 2px 2px 5px #babecc, -5px -5px 10px hsl(0deg 0% 100% / 45%);
+                outline: none!important;
+                
               }
            @media  screen and (max-width: 576px) {
               .toast-success{background-color:#000!important;position: relative!important; top: 80px; left: -50px;}
@@ -97,18 +132,10 @@
                      </ul>
                   </li>
                   <li>
-                  @if(Auth::check())
-                  <a href="/about">About</a> 
-                  @else
                   <a href="/login_page">About</a>
-                  @endif
                   </li>
                   <li>
-                  @if(Auth::check())
                   <a href="/contact-us">Contact Us</a> 
-                  @else
-                  <a href="/login_page">Contact Us</a>
-                  @endif
                  </li>
                </ul>
             </nav>
@@ -215,11 +242,10 @@
                <strong>Subtotal :</strong>
                <span class="amount">$144.00</span>
             </div>
-            <a href="cart.html" class="btn theme--btn-default btn--lg d-block d-sm-inline-block rounded-5 mr-sm-2">view
+            <a href="{{url('/cart')}}" class="btn  ml-5 theme--btn-default btn--lg d-block d-sm-inline-block rounded-5 mr-sm-2">view
             cart</a>
-            <a href="checkout.html"
+            <a href="{{url('/checkout')}}"
                class="btn theme-btn--dark1 btn--lg d-block d-sm-inline-block mt-4 mt-sm-0 rounded-5">checkout</a>
-            <p class="minicart-message">Free Shipping on All Orders Over $100!</p>
          </div>
       </div>
       <!-- OffCanvas Cart End -->
@@ -285,7 +311,7 @@
                <div class="row align-items-center">
                   <div class="col-sm-6 col-lg-2 order-first">
                      <div class="logo text-center text-sm-left mb-30 mb-sm-0">
-                        <a href="/"><img src="{{url('../images/main_logo2.png')}}" alt="logo"></a>
+                        <a href="/"><img src="{{url('../images/main_logo2-1.png')}}" alt="logo"></a>
                      </div>
                   </div>
                   <div class="col-lg-6 col-md-5 order-last order-md-first">
@@ -305,7 +331,7 @@
                                <ul class="d-flex justify-content-center justify-content-md-end align-items-center">
                         @guest
                             <li>
-                                <a href="{{url('/login_page')}}" style="color: black!important; font-weight: bolder!important;">Login</a>
+                                <a href="{{url('/login_page')}}" class="btn login_btn">Login</a>
                             </li>
                             @if (Route::has('register'))
                            <!--  <li class="nav-item">
@@ -335,8 +361,8 @@
                         </ul> 
                            </li>
                            <li class="mr-0 cart-block position-relative">
-                              <a href="/cart">
-                                 <span class="position-relative">
+                              <a  class="offcanvas-toggle" href="#offcanvas-cart">
+                                 <span class="position-relative">&nbsp;&nbsp;
                                  <i class="icon-bag" style="font-weight: bolder; color: black!important;"></i>
                                  </span>
                                  <span class="cart-total position-relative">
@@ -392,18 +418,10 @@
                            </ul>
                         </li>
                         <li>
-                          @if(Auth::check())
                            <a href="/about">About</a> 
-                           @else
-                           <a href="/login_page">About</a>
-                          @endif
                         </li>
                         <li>
-                        @if(Auth::check())
                            <a href="/contact-us">Contact Us</a> 
-                           @else
-                           <a href="/login_page">Contact Us</a>
-                          @endif
                         </li>
                      </ul>
                   </div>
@@ -514,7 +532,7 @@
       <!-- header end -->
       @yield('content')
       <!-- footer strat -->
-      <footer class="bg-light theme1 position-relative" style="background-color: #cdd012!important;">
+      <footer class="bg-light theme1 position-relative" style="background: linear-gradient( #dfeae7, #F0F2F0);">
          <!-- footer bottom start -->
          <div class="footer-bottom pt-80 pb-30">
             <div class="container">
@@ -523,7 +541,7 @@
                      <div class="footer-widget mx-w-400">
                         <div class="footer-logo mb-35">
                            <a href="/">
-                           <img src="{{url('../images/main_logo2.png')}}" alt="footer logo">
+                           <img src="{{url('../images/main_logo2-1.png')}}" alt="footer logo">
                            </a>
                         </div>
                         <p class="text mb-30">We are a team of designers and developers that create high quality

@@ -145,26 +145,25 @@ public function placeOrder(Request $a){
 	if($data){
 	$useremail=Auth::user()->email;
 	DB::table('carts')->where('user_email',$useremail)->delete();
-	return redirect('/checkout')->with('Order_placed','Your order has been placed Successfully');
+	return redirect('/')->with('Order_placed','Your order has been placed Successfully');
 	}
 	else{
-	return redirect('/checkout')->with('Order_placed','Your order has not been placed Successfully');
+	return redirect('/ ')->with('Order_placed','Your order has not been placed Successfully');
 	}
 }
 
-// public function orderConfirm(){
-// 	$useremail=Auth::user()->email;
-// 	DB::table('carts')->where('user_email',$useremail)->delete();
-// 	return view('front.thanks');
-// }
+public function orderConfirm(){
+	
+	return view('front.thanks');
+}
 
 public function userAccount(){
 	if (Auth::check()){
 	$useremail= Auth::User()->email;
-	$order=Order::where('useremail',$useremail)->get();
-	$data= OrderProduct::where('useremail',$useremail)->get();
-	$a= OrderProduct::where('useremail',$useremail)->get();
-	return view('front.user_account',compact('data','a','order'));
+	 $data = DB::table('orders')
+       ->join('order_products','orders.id','order_products.order_id',$useremail)
+       ->get();
+	return view('front.user_account',compact('data'));
 	}
 	else{
 	$session_id=Session::getId();
@@ -183,9 +182,13 @@ public function editAddress(){
 
 public function pdf(){
 
-	$order=Order::all();
-	$data = OrderProduct::all();
-	$pdf = PDF::loadView('front.user_account',compact('data','order'))->setPaper('a4', 'portrait');
+	$useremail= Auth::User()->email;
+	$data = DB::table('orders')
+       ->join('order_products','orders.id','order_products.order_id',$useremail)
+       ->get();
+
+	$pdf = PDF::loadView('front.user_account',compact('data'))->setPaper('a4', 'portrait');
+	
 	return $pdf->download('Order-details.pdf');
 	}
 
