@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers; 
 use Illuminate\Http\Request; 
-use DB; use App\User; 
+use DB; 
+use App\User; 
 use Hash; 
 
 class ResetPasswordController extends Controller { 

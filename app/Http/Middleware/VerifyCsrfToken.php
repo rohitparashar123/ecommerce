@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
      protected $except = [
-         'http://paytm-laravel.test/paytm-callback',
+         'http://localhost:8000/paytm-callback',
     ];
 }

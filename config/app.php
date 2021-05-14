@@ -163,7 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
-         
+         Intervention\Image\ImageServiceProvider::class,
         /*sweet alert class */
 
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
@@ -235,7 +235,7 @@ return [
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         'PDF' => \Barryvdh\DomPDF\Facade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

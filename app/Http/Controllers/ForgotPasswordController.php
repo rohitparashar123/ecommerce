@@ -32,6 +32,6 @@ class ForgotPasswordController extends Controller
           $message->subject('Reset Password Notification');
       });
 
-      return back()->with('do_login', 'We have e-mailed your password reset link, Check your Gmail!');
+      return back()->with('info_msg', 'We have e-mailed your password reset link, Check your Gmail!');
   }
 }

@@ -31,7 +31,9 @@
     font-style: italic;
     color: green;
 }
-
+ .card{
+  box-shadow: 2px 2px 5px #babecc, -5px -5px 10px hsl(0deg 0% 100% / 45%);
+}
 </style>
 <div class="container-fluid body_login">
     <div class="row">

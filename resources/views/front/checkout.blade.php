@@ -147,12 +147,20 @@
                             <div class="card-body pt-0">
                                
                                 <div class="custom-radio mb-4">
-                                    <input type="radio" id="test7" name="payment_method" value="Cash on delivery">
-                                    <label for="test7">Pay by Cash on Delivery</label>
+                                    <input type="radio" id="credit" name="payment_method" value="Cash on delivery" class="cod">
+                                    <label for="credit">Pay by Cash on Delivery</label>
                                 </div>
                                 <div class="custom-radio mb-4">
-                                     <input type="radio" id="test7" name="payment_method" value="paytm">
-                                    <label><a href="/payment">Paytm</a></label>
+                                     <input type="radio" id="debit" name="payment_method" value="paytm" class="paytm">
+                                    <label for="debit">Paytm</label>
+                                </div>
+                                 <div class="custom-radio mb-4">
+                                     <input type="radio" id="test7" name="payment_method" value="googlepay" class="paypal">
+                                    <label><a href="/payment">Google Pay</a></label>
+                                </div>
+                                 <div class="custom-radio mb-4">
+                                     <input type="radio" id="test7" name="payment_method" value="razorpay" class="razorpay">
+                                    <label><a href="/payment">Razorpay</a></label>
                                 </div>
                                 <div class="filter-check-box mb-4">
                                     <input type="checkbox" id="20828" required="">
@@ -196,11 +204,9 @@
                     </li>
 
                    <li class="list-group-item text-center">
-                         @if(Auth::check())
-                        <button type="submit" class="btn theme-btn--dark1 btn--md">Place Order</a>
-                        @else
-                        <a href="/login_page" class="btn theme-btn--dark1 btn--md">Place Order</a>
-                        @endif
+                         
+                        <input type="submit" class="btn theme-btn--dark1 btn--md" onclick="return select_payment_method()" value="Place Order">
+                       
                     </li>
                     </form>
                 </ul>

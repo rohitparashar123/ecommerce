@@ -5,7 +5,6 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
       <meta name="description" content="" />
-       <meta name="csrf-token" content="{{ csrf_token() }}">
       <title>@yield('title')</title>
       <!-- Favicon -->
       <link rel="shortcut icon" type="image/x-icon" href="{{asset('../images/favicon.png')}}" />
@@ -889,6 +888,11 @@
       toastr.success("{!!Session::get('do_login')!!}");
      </script>
       @endif
+      @if(Session::has('info_msg'))
+      <script> 
+      toastr.info("{!!Session::get('info_msg')!!}");
+     </script>
+      @endif
       @if(Session::has('Order_placed'))
       <script> 
       toastr.success("{!!Session::get('Order_placed')!!}");
@@ -909,5 +913,17 @@
       <!-- <script src="front/assets/js/vendor/vendor.min.js"></script>
          <script src="front/assets/js/plugins/plugins.min.js"></script>
          <script src="front/assets/js/main.js"></script> -->
+         <script >
+           function select_payment_method(){
+            if($('.paytm').is(':checked') || $('.cod').is(':checked') || $('.googlepay').is(':checked')  || $('.razorpay').is(':checked') ){
+      alert('checked');
+    }
+    else{
+      alert('Please select payment method');
+      return false;
+    }           
+  }
+
+         </script>
    </body>
 </html>

@@ -168,6 +168,25 @@
         width: 100% !important;
       }
     }
+    .reset-img{
+      max-width: 40%;
+      height: auto;
+      background: no-repeat;
+    }
+  .theme-btn--dark1 {
+  color: #000!important;
+  text-decoration: none;
+  background: #ffc107;
+}
+
+.theme-btn--dark1:hover {
+  color: #ffffff!important;
+  text-decoration: none;
+  background: #f33535;
+}
+.btn--md {
+  padding: 10px 25px;
+}
   </style>
 </head>
 <body>
@@ -193,9 +212,11 @@
                     <!-- Action -->
                     <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
                       <tr>
+                         <!-- <img src="../images/email.png" class="img-fluid"> -->
                         <td align="center">
                           <div>
-                            <a href="http://localhost:8000/reset-password/{{$token}}" class="button button--blue" style="color: black; font-weight: 700;">Reset Your Password</a>
+                            <img src="https://cdn.pixabay.com/photo/2015/10/30/10/40/key-1013662_960_720.jpg" class="reset-img"><br>
+                            <a href="http://localhost:8000/reset-password/{{$token}}" class="btn theme-btn--dark1 btn--md" style="color: black; font-weight: 700;">Reset Your Password</a>
                           </div>
                         </td>
                       </tr>

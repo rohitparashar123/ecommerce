@@ -38,8 +38,7 @@ Route::post('paypal', array('as' => 'paypal','uses' => 'PaypalController@postPay
 Route::get('paypal', array('as' => 'status','uses' => 'PaypalController@getPaymentStatus',));
 
 //PAYTM ROUTES
-Route::resource('/order', 'PaytmController');
-Route::post('/paytm-callback', 'PaytmController@paytmCallback');
+
 
 
 //ADMIN CONTROLLER
@@ -106,15 +105,19 @@ Route::get('/','FrontController@index');
 Route::group(['middleware'=>'front_auth'],function(){
 
 //CHECKOUT PAGE
+
+
+
+
+    });
+
+
 Route::get('/checkout','FrontController@checkout');
 Route::get('cart/updatequantity/{id}/{product_quantity}','FrontController@updatequantity');
 
 //PLACE ORDER
 Route::post('/place_order','FrontController@placeOrder');
 Route::get('/thanks','FrontController@orderConfirm');
-
-    });
-
 //LOGIN/REGISTER ROUTES
 Route::get('/login_page','UserController@login');
 Route::post('/login_user','UserController@doLogin')->name('front.dologin');
@@ -148,3 +151,15 @@ Route::post('/forget_password', 'ForgotPasswordController@postEmail');
 
 Route::get('/reset-password/{token}', 'ResetPasswordController@getPassword');
 Route::post('/reset-password', 'ResetPasswordController@updatePassword');
+
+Route::get('/clear', function() { 
+        Artisan::call('cache:clear');
+        Artisan::call('config:clear');
+        Artisan::call('config:cache');
+        Artisan::call('view:clear');
+        Artisan::call('route:clear'); 
+        return "Cleared!"; 
+    });
+
+//  PAYTM METHOD ROUTES
+Route::post('/paytm-callback', 'FrontController@paytmCallback');
