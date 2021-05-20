@@ -45,13 +45,13 @@
                                         <label for="firstname" class="col-md-3 col-form-label">Full
                                             name</label>
                                         <div class="col-md-6">
-                                            <input type="text" id="firstname" name="name" class="form-control" value="{{Auth::user()->name}}">
+                                            <input type="text" id="firstname" class="form-control" value="{{Auth::user()->name}}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="email" class="col-md-3 col-form-label">Email</label>
                                         <div class="col-md-6">
-                                            <input type="email" name="email" id="email" class="form-control" value="{{Auth::user()->email}}">
+                                            <input type="email"  id="email" class="form-control" value="{{Auth::user()->email}}">
                                         </div>
                                     </div>
                             </div>
@@ -76,6 +76,20 @@
                                         </p>
                                     </div>
                                     <div class="check-out-content">
+                                         <div class="form-group row">
+                                                <label class="col-md-3" for="address1">Full Name</label>
+                                                <div class="col-md-6">
+                                                    <input class="form-control" name="name" id="address1" 
+                                                        type="text" required="">
+                                                </div>
+                                            </div>
+                                             <div class="form-group row">
+                                                <label class="col-md-3" for="address1">Email</label>
+                                                <div class="col-md-6">
+                                                    <input class="form-control" name="email" id="address1"
+                                                        type="email" required="">
+                                                </div>
+                                            </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3" for="address1">Address</label>
                                                 <div class="col-md-6">

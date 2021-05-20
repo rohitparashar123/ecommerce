@@ -14,20 +14,75 @@ use App\OrderProduct;
 use PDF;
 
 
+
 class FrontController extends Controller
 {
-public function index(){
+	// sms send code
+	function sms($mob,$msg)
+{
+  
+$username = urlencode("u4017"); 
+$msg_token = urlencode("vNYI8c"); 
+$sender_id = urlencode("HMLBTM"); // optional (compulsory in transactional sms) 
+$message = urlencode("$msg"); 
+$mobile = urlencode("$mob"); 
 
-	$banner=Banner::all();
-	$category=Category::all();
-	$products=Product::all();
-	return view('front.index',compact('banner','category','products'));
+$url = " https://www.fast2sms.com/dev/wallet?authorization=GspAPXy1tSedvYQhFi4kanOHzMVmEcblo2xW3NrKLBugTZRj700WEiwDCOJxjUBm1M5zrQAlL2Gvct4a".$username."&msg_token=".$msg_token."&sender_id=".$sender_id."&message=".$msg."&mobile=".$mobile.""; 
+
+
+//API URL
+//$url="http://sms.globehost.com/api/sendhttp.php";
+$postData=json_enco(array(
+$username = urlencode("u4017"), 
+$msg_token = urlencode("vNYI8c"), 
+$sender_id = urlencode("HMLBTM"), // optional (compulsory in transactional sms) 
+$message = urlencode("$msg"),
+$mobile = urlencode("$mob")));
+// init the resource
+$ch = curl_init();
+curl_setopt_array($ch, array(
+    CURLOPT_URL => $url,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_POST => true,
+    CURLOPT_POSTFIELDS => $postData
+    //,CURLOPT_FOLLOWLOCATION => true
+));
+
+
+
+//Ignore SSL certificate verification
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+
+//get response
+$output = curl_exec($ch);
+
+//Print error if any
+if(curl_errno($ch))
+{
+    echo 'error:' . curl_error($ch);
 }
+
+curl_close($ch);
+return 1;
+}
+	//sms code send end
+
+
+public function index()
+    { 
+        $banner=Banner::all();   
+        $categories=Category::orderby('name','ASC')->get(); 
+        $products=Product::orderby('created_at','DESC')->get();
+        return view('front.index',compact('banner','categories','products'));    
+    }
 
 public function productdetail($id){
 
 	$products=Product::find($id);
-	return view('front.product-detail',compact('products'));
+	$prds=Product::orderby('created_at','DESC')->get();
+	return view('front.product-detail',compact('products','prds'));
 }
 
 public function addtocart(Request $a){
@@ -148,18 +203,18 @@ public function placeOrder(Request $a){
 	}
 	
 	if($data['payment_method']=='cod'){
+		return view('front.thanks');
+	}
+	if($data['payment_method']==''){
 		return redirect('thanks');
 	}
-	if($data['payment_method']=='cod'){
+	if($data['payment_method']==''){
 		return redirect('thanks');
 	}
-	if($data['payment_method']=='cod'){
+	if($data['payment_method']==''){
 		return redirect('thanks');
 	}
-	if($data['payment_method']=='cod'){
-		return redirect('thanks');
-	}
-	if($data['payment_method']=='cod'){
+	if($data['payment_method']==''){
 		return redirect('thanks');
 	}
 	if($data['payment_method']=='paytm'){
@@ -521,21 +576,18 @@ public function handlePaytmRequest( $order_id, $grand_total ) {
 			$order->order_status = 'complete';
 			$order->transaction_id = $transaction_id;
 			$order->save();
-
+		   
 			// $useremail=Auth::user()->email;
 	  //       DB::table('carts')->where('user_email',$useremail)->delete();
 
-			return view( 'front.order-complete', compact( 'order' ) );
+			return view( 'front.order-complete', compact( 'order') );
 
 		} else if( 'TXN_FAILURE' === $request['STATUS'] ){
 			return view( 'front.payment-failed' );
 		}
 	}
 
-public function orderConfirm(){
-	
-	return view('front.thanks');
-}
+
 
 public function userAccount(){
 	if (Auth::check()){

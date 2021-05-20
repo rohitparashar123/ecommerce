@@ -22,7 +22,7 @@ use App\Http\Controllers\UserController;
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/msg', 'UserController@fire');
 
 //GOOGLE LOGIN
 Route::get('auth/google', 'Auth\GoogleController@redirectToGoogle');
@@ -117,7 +117,6 @@ Route::get('cart/updatequantity/{id}/{product_quantity}','FrontController@update
 
 //PLACE ORDER
 Route::post('/place_order','FrontController@placeOrder');
-Route::get('/thanks','FrontController@orderConfirm');
 //LOGIN/REGISTER ROUTES
 Route::get('/login_page','UserController@login');
 Route::post('/login_user','UserController@doLogin')->name('front.dologin');
@@ -125,7 +124,7 @@ Route::get('/logout_user','UserController@userlogout');
 Route::get('/register_page','UserController@register');
 Route::post('/registering_user','UserController@doRegister');
 Route::get('/verify','UserController@verifyUser')->name('verify.user');
-Route::post('/change-password','UserController@updatePassword');
+Route::post('/change-password', 'UserController@changepassword')->name('change.password');
 
 //USER ACCCOUNT ROUTES
 Route::get('/User-account','FrontController@userAccount');
@@ -138,7 +137,7 @@ Route::get('/cart','FrontController@cart');
 Route::get('/cart/delete/{id}','FrontController@deletecart');
 
 //PRODUCT DETAIL PAGE ROUTE
-Route::get('product-detail/{id}','FrontController@productdetail');
+Route::get('productdetail/{id}','FrontController@productdetail');
 
 //CONTACT US PAGE
 Route::get('/contact-us','FrontController@contactus');
@@ -163,3 +162,9 @@ Route::get('/clear', function() {
 
 //  PAYTM METHOD ROUTES
 Route::post('/paytm-callback', 'FrontController@paytmCallback');
+
+Route::get('resizeImage', 'ImageResizeController@resizeImage');
+Route::post('resizeImagePost', 'ImageResizeController@resizeImagePost')->name('resizeImagePost');
+
+// firebase notification routes
+

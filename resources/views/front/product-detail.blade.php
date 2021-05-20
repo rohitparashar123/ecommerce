@@ -1,21 +1,28 @@
 @extends('front/master')
 @section('title','Single-product')
 @section('content')
-<!-- breadcrumb-section start -->
-<nav class="breadcrumb-section theme3 bg-lighten2 pt-110 pb-110">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="shop-grid-3-column.html">Bags & Shoes</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Originals Windbreaker Winter Jacket</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</nav>
-<!-- breadcrumb-section end -->
+<style type="text/css">
+    .img-responsive{
+        width: 100%;
+        height: 400px;
+    }
+    @media screen and (max-width: 576px) {
+        .img-responsive{
+        width: 100%;
+        height: 300px;
+    }
+    }
+    .img-responsive_below{
+        width: 250px;
+        height: 200px;
+    }
+    @media screen and (max-width: 576px) {
+        .img-responsive_below{
+        width: 360px;
+        height: 260px;
+    }
+    }
+</style>
 <!-- product-single start -->
 <section class="product-single theme3 pt-60">
     <div class="container">
@@ -28,62 +35,14 @@
                 <div class="product-sync-init mb-20">
                     <div class="single-product">
                         <div class="product-thumb">
-                            <img src="{{url('/upload/'.$products->product_image)}}" alt="product-thumb">
+                            <img src="{{url('/upload/'.$products->product_image)}}" alt="product-thumb" class="img-responsive">
                         </div>
                     </div>
-                    <!-- single-product end -->
-                    <div class="single-product">
-                        <div class="product-thumb">
-                            <img src="{{url('front/assets/img/single-product/2.jpg')}}" alt="product-thumb">
-                        </div>
-                    </div>
-                    <!-- single-product end -->
-                    <div class="single-product">
-                        <div class="product-thumb">
-                            <img src="{{url('front/assets/img/single-product/3.jpg')}}" alt="product-thumb">
-                        </div>
-                    </div>
-                    <!-- single-product end -->
-                    <div class="single-product">
-                        <div class="product-thumb">
-                            <img src="{{url('front/assets/img/single-product/4.jpg')}}" alt="product-thumb">
-                        </div>
-                    </div>
-                    <!-- single-product end -->
-                </div>
-
-                <div class="product-sync-nav single-product">
-                    <div class="single-product">
-                        <div class="product-thumb">
-                            <a href="javascript:void(0)"> <img src="{{url('front/assets/img/single-product/1.2x.jpg')}}"
-                                    alt="product-thumb"></a>
-                        </div>
-                    </div>
-                    <!-- single-product end -->
-                    <div class="single-product">
-                        <div class="product-thumb">
-                            <a href="javascript:void(0)"> <img src="{{url('front/assets/img/single-product/2.2x.jpg')}}"
-                                    alt="product-thumb"></a>
-                        </div>
-                    </div>
-                    <!-- single-product end -->
-                    <div class="single-product">
-                        <div class="product-thumb">
-                            <a href="javascript:void(0)"><img src="{{url('front/assets/img/single-product/3.2x.jpg')}}"
-                                    alt="product-thumb"></a>
-                        </div>
-                    </div>
-                    <!-- single-product end -->
-                    <div class="single-product">
-                        <div class="product-thumb">
-                            <a href="javascript:void(0)"><img src="{{url('front/assets/img/single-product/4.2x.jpg')}}"
-                                    alt="product-thumb"></a>
-                        </div>
-                    </div>
+                    
                     <!-- single-product end -->
                 </div>
             </div>
-            <div class="col-lg-6 mt-5 mt-md-0">
+            <div class="col-lg-6 mt-md-0">
                 <div class="single-product-info">
                     <div class="single-product-head">
                         <h2 class="title mb-20">{{$products->product_name}}</h2>
@@ -101,8 +60,10 @@
                     </div>
                     <div class="product-body mb-40">
                         <div class="d-flex align-items-center mb-30">
-                            <h6 class="product-price mr-20"><del class="del">$23.90</del>
-                                <span class="onsale">{{$products->product_price}}</span></h6>
+                            <h6 class="product-price mr-20"><del class="del">₹
+                                23.90</del>
+                                <span class="onsale">₹
+                                {{$products->product_price}}</span></h6>
                             <span class="badge position-static bg-dark rounded-0">Save 10%</span>
                         </div>
                       
@@ -136,17 +97,6 @@
                         </div>
                         <div class="addto-whish-list">
                             <a href="#"><i class="icon-heart"></i> Add to wishlist</a>
-                            <a href="#"><i class="icon-shuffle"></i> Add to compare</a>
-                        </div>
-                       
-                        <div class="pro-social-links mt-10">
-                            <ul class="d-flex align-items-center">
-                                <li class="share">Share</li>
-                                <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                                <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                                <li><a href="#"><i class="ion-social-google"></i></a></li>
-                                <li><a href="#"><i class="ion-social-pinterest"></i></a></li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -315,16 +265,15 @@
             </div>
             <div class="col-12">
                 <div class="product-slider-init slick-nav">
+                    @foreach($prds as $prd)
                     <div class="slider-item">
                         <div class="card product-card">
                             <div class="card-body p-0">
                                 <div class="media flex-column">
                                     <div class="product-thumbnail position-relative">
                                         <span class="badge badge-danger top-right">New</span>
-                                        <a href="single-product.html">
-                                            <img class="first-img" src="assets/img/new-products/1.jpg" alt="thumbnail">
-                                            <img class="second-img" src="assets/img/new-products/1.1.jpg"
-                                                alt="thumbnail">
+                                        <a href="{{url('productdetail/'.$prd->id)}}">
+                                            <img src="{{url('/upload/'.$prd->product_image)}}" alt="thumbnail" class="img-responsive_below">
                                         </a>
                                         <!-- product links -->
                                         <ul class="product-links d-flex justify-content-center">
@@ -351,8 +300,7 @@
                                     </div>
                                     <div class="media-body">
                                         <div class="product-desc">
-                                            <h3 class="title"><a href="shop-grid-4-column.html">New Luxury
-                                                    Men's Slim Fit Shirt Short Sleeve...</a></h3>
+                                            <h3 class="title"><a href="{{url('productdetail/'.$prd->id)}}">{{$prd->product_name}}</a></h3>
                                             <div class="star-rating">
                                                 <span class="ion-ios-star"></span>
                                                 <span class="ion-ios-star"></span>
@@ -361,7 +309,8 @@
                                                 <span class="ion-ios-star de-selected"></span>
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between">
-                                                <h6 class="product-price">$11.90</h6>
+                                                <h6 class="product-price">₹
+                                                {{$prd->product_price}}</h6>
                                                 <button class="pro-btn" data-toggle="modal"
                                                     data-target="#add-to-cart"><i class="icon-basket"></i></button>
                                             </div>
@@ -371,290 +320,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- slider-item end -->
-                    <div class="slider-item">
-                        <div class="card product-card">
-                            <div class="card-body p-0">
-                                <div class="media flex-column">
-                                    <div class="product-thumbnail position-relative">
-                                        <span class="badge badge-danger top-right">New</span>
-                                        <a href="single-product.html">
-                                            <img class="first-img" src="assets/img/new-products/2.jpg" alt="thumbnail">
-                                        </a>
-                                        <!-- product links -->
-                                        <ul class="product-links d-flex justify-content-center">
-                                            <li>
-                                                <a href="wishlist.html">
-                                                    <span data-toggle="tooltip" data-placement="bottom"
-                                                        title="add to wishlist" class="icon-heart"> </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="modal" data-target="#compare">
-                                                    <span data-toggle="tooltip" data-placement="bottom"
-                                                        title="Add to compare" class="icon-shuffle"></span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="modal" data-target="#quick-view">
-                                                    <span data-toggle="tooltip" data-placement="bottom"
-                                                        title="Quick view" class="icon-magnifier"></span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <!-- product links end-->
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="product-desc">
-                                            <h3 class="title"><a href="shop-grid-4-column.html">New Balance
-                                                    Fresh Foam Kaymin from new zeland</a></h3>
-                                            <div class="star-rating">
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star de-selected"></span>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <h6 class="product-price">$11.90</h6>
-                                                <button class="pro-btn" data-toggle="modal"
-                                                    data-target="#add-to-cart"><i class="icon-basket"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- slider-item end -->
-                    <div class="slider-item">
-                        <div class="card product-card">
-                            <div class="card-body p-0">
-                                <div class="media flex-column">
-                                    <div class="product-thumbnail position-relative">
-                                        <span class="badge badge-success top-left">-10%</span>
-                                        <span class="badge badge-danger top-right">New</span>
-                                        <a href="single-product.html">
-                                            <img class="first-img" src="assets/img/new-products/3.jpg" alt="thumbnail">
-                                        </a>
-                                        <!-- product links -->
-                                        <ul class="product-links d-flex justify-content-center">
-                                            <li>
-                                                <a href="wishlist.html">
-                                                    <span data-toggle="tooltip" data-placement="bottom"
-                                                        title="add to wishlist" class="icon-heart"> </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="modal" data-target="#compare">
-                                                    <span data-toggle="tooltip" data-placement="bottom"
-                                                        title="Add to compare" class="icon-shuffle"></span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="modal" data-target="#quick-view">
-                                                    <span data-toggle="tooltip" data-placement="bottom"
-                                                        title="Quick view" class="icon-magnifier"></span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <!-- product links end-->
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="product-desc">
-                                            <h3 class="title"><a href="shop-grid-4-column.html">Juicy
-                                                    Couture
-                                                    Tricot Logo Stripe Jacket</a></h3>
-                                            <div class="star-rating">
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star de-selected"></span>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <h6 class="product-price"> $21.51</h6>
-                                                <button class="pro-btn" data-toggle="modal"
-                                                    data-target="#add-to-cart"><i class="icon-basket"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- slider-item end -->
-                    <div class="slider-item">
-                        <div class="card product-card">
-                            <div class="card-body p-0">
-                                <div class="media flex-column">
-                                    <div class="product-thumbnail position-relative">
-                                        <span class="badge badge-danger top-right">New</span>
-                                        <a href="single-product.html">
-                                            <img class="first-img" src="assets/img/new-products/4.jpg" alt="thumbnail">
-                                            <img class="second-img" src="assets/img/new-products/4.1.jpg"
-                                                alt="thumbnail">
-                                        </a>
-                                        <!-- product links -->
-                                        <ul class="product-links d-flex justify-content-center">
-                                            <li>
-                                                <a href="wishlist.html">
-                                                    <span data-toggle="tooltip" data-placement="bottom"
-                                                        title="add to wishlist" class="icon-heart"> </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="modal" data-target="#compare">
-                                                    <span data-toggle="tooltip" data-placement="bottom"
-                                                        title="Add to compare" class="icon-shuffle"></span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="modal" data-target="#quick-view">
-                                                    <span data-toggle="tooltip" data-placement="bottom"
-                                                        title="Quick view" class="icon-magnifier"></span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <!-- product links end-->
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="product-desc">
-                                            <h3 class="title"><a href="shop-grid-4-column.html">Juicy
-                                                    Couture
-                                                    Tricot Logo Stripe Jacket</a></h3>
-                                            <div class="star-rating">
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star de-selected"></span>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <h6 class="product-price"><del class="del">$23.90</del>
-                                                    <span class="onsale">$21.51</span></h6>
-                                                <button class="pro-btn" data-toggle="modal"
-                                                    data-target="#add-to-cart"><i class="icon-basket"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- slider-item end -->
-                    <div class="slider-item">
-                        <div class="card product-card">
-                            <div class="card-body p-0">
-                                <div class="media flex-column">
-                                    <div class="product-thumbnail position-relative">
-                                        <span class="badge badge-danger top-right">New</span>
-                                        <a href="single-product.html">
-                                            <img class="first-img" src="assets/img/new-products/5.jpg" alt="thumbnail">
-                                        </a>
-                                        <!-- product links -->
-                                        <ul class="product-links d-flex justify-content-center">
-                                            <li>
-                                                <a href="wishlist.html">
-                                                    <span data-toggle="tooltip" data-placement="bottom"
-                                                        title="add to wishlist" class="icon-heart"> </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="modal" data-target="#compare">
-                                                    <span data-toggle="tooltip" data-placement="bottom"
-                                                        title="Add to compare" class="icon-shuffle"></span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="modal" data-target="#quick-view">
-                                                    <span data-toggle="tooltip" data-placement="bottom"
-                                                        title="Quick view" class="icon-magnifier"></span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <!-- product links end-->
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="product-desc">
-                                            <h3 class="title"><a href="shop-grid-4-column.html">New Luxury
-                                                    Men's
-                                                    Slim Fit Shirt Short Sleeve...</a></h3>
-                                            <div class="star-rating">
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star de-selected"></span>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <h6 class="product-price">$11.90</h6>
-                                                <button class="pro-btn" data-toggle="modal"
-                                                    data-target="#add-to-cart"><i class="icon-basket"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- slider-item end -->
-                    <div class="slider-item">
-                        <div class="card product-card">
-                            <div class="card-body p-0">
-                                <div class="media flex-column">
-                                    <div class="product-thumbnail position-relative">
-                                        <span class="badge badge-danger top-right">New</span>
-                                        <a href="single-product.html">
-                                            <img class="first-img" src="assets/img/new-products/6.jpg" alt="thumbnail">
-                                        </a>
-                                        <!-- product links -->
-                                        <ul class="product-links d-flex justify-content-center">
-                                            <li>
-                                                <a href="wishlist.html">
-                                                    <span data-toggle="tooltip" data-placement="bottom"
-                                                        title="add to wishlist" class="icon-heart"> </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="modal" data-target="#compare">
-                                                    <span data-toggle="tooltip" data-placement="bottom"
-                                                        title="Add to compare" class="icon-shuffle"></span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="modal" data-target="#quick-view">
-                                                    <span data-toggle="tooltip" data-placement="bottom"
-                                                        title="Quick view" class="icon-magnifier"></span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <!-- product links end-->
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="product-desc">
-                                            <h3 class="title"><a href="shop-grid-4-column.html">New Luxury
-                                                    Men's
-                                                    Slim Fit Shirt Short Sleeve...</a></h3>
-                                            <div class="star-rating">
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star"></span>
-                                                <span class="ion-ios-star de-selected"></span>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <h6 class="product-price"><del class="del">$23.90</del>
-                                                    <span class="onsale">$21.51</span></h6>
-                                                <button class="pro-btn" data-toggle="modal"
-                                                    data-target="#add-to-cart"><i class="icon-basket"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                     <!-- slider-item end -->
                 </div>
             </div>

@@ -168,6 +168,11 @@
         width: 100% !important;
       }
     }
+        .reset-img{
+      max-width: 40%;
+      height: auto;
+      background: no-repeat;
+    }
   </style>
 </head>
 <body>
@@ -197,6 +202,7 @@
                       <tr>
                         <td align="center">
                           <div>
+                            <img src="https://cdn.pixabay.com/photo/2015/11/03/09/03/at-1019990_960_720.jpg" class="reset-img"><br>
                             <a href="http://localhost:8000/verify?code={{$email_data['verification_code']}}" class="button button--blue" style="color: black; font-weight: 700;">Verify Your Email</a>
                           </div>
                         </td>

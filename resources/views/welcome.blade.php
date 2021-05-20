@@ -1,100 +1,109 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+<section class="product-tab theme3 bg-white pt-50 pb-80">
+    <div class="container">
+        <div class="product-tab-nav mb-35">
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <div class="section-title text-center mb-30">
+                        <h2 class="title text-dark text-capitalize">Our products</h2>
+                        <p class="text mt-10">Add our products to weekly line up</p>
+                    </div>
                 </div>
-            @endif
+                <div class="col-12">
+                    <nav class="product-tab-menu theme1">
+                        
+                         <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                            @foreach ($categories as $key=>$category)
+                            <li class="nav-item">
+                                <a  class="nav-link {{ $key==0 ? 'active' : '' }}" id="pills-home-tab" data-toggle="pill" role="tab" aria-controls="pills-home" href="#pills-category_{{$category->id}}" aria-selected="true"   
+                                    >{{$category->name}}</a>
+                            </li>
+                            
+                            @endforeach
+                        </ul>
+                    
+                    </nav>
                 </div>
             </div>
         </div>
-    </body>
-</html>
+        <!-- product-tab-nav end -->
+        <div class="row">
+            <div class="col-12">
+                <div class="tab-content" id="pills-tabContent">
+                  
+                    <!-- first tab-pane -->
+                    @foreach ($categories as $key=>$category )
+                        
+                   
+                    <div class="tab-pane fade show {{ $key==0 ? 'active' : ''}}" 
+                       id="pills-category_{{$category->id}}"  role="tabpanel"
+                        aria-labelledby="pills-home-tab">
+                       
+                        <div class="product-slider-init theme1 slick-nav">                        
+                            
+                       
+                                   
+                            @php
+
+                            $c_products=DB::table('products')->where('category_id',$category->id)->get();
+                
+                            @endphp
+                              
+                           
+
+                            @foreach ($c_products as $products)
+                                
+                           
+                            <div class="slider-item">
+                                <div class="product-list mb-30">
+                                <div class="card product-card">
+                                    <div class="card-body p-0">
+                                        <div class="media flex-column">
+           
+                                 <div class="product-thumbnail position-relative">
+                                                <span class="badge badge-danger top-right">New</span>
+                                                                
+                                                
+                                                <a href="{{url('productdetail/'.$products->id)}}">
+                                                    <img src="{{ url('/upload/'.$products->product_image) }}" 
+                                                    style="height: 100%; width: 100%; "        alt="thumbnail">
+                                                </a>
+                                             
+                                               
+
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="product-desc">
+                                                    <h3 class="title"><a href="{{'productdetail/'.$products->id}}">
+                                                        {{$products->product_name}}</a></h3>
+                                                    <div class="star-rating">
+                                                        <span class="ion-ios-star"></span>
+                                                        <span class="ion-ios-star"></span>
+                                                        <span class="ion-ios-star"></span>
+                                                        <span class="ion-ios-star"></span>
+                                                        <span class="ion-ios-star de-selected"></span>
+                                                    </div>
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <h6 class="product-price"><span>Rs. </span> {{$products->product_price}}</h6>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                            <!-- slider-item end -->
+                        </div>
+                    </div>
+                     @endforeach
+                   
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</section>
+

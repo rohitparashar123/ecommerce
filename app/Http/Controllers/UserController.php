@@ -78,5 +78,18 @@ else{
 return redirect()->back()->with('message','Invalid Email and Password');
 }
 }
+ public function changepassword(Request $request)
+    {
+        $request->validate([
+            'new_password' => ['required'],
+            'new_confirm_password' => ['same:new_password'],
+        ]);
+   
+        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+   
+        return redirect('/User-account')->with('do_login','Password changed successfully.');
+    }
+
+    
 
 }

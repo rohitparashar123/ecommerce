@@ -232,18 +232,13 @@
                                         <div class="col-12 mb-30">
                                             <h4>Password change</h4>
                                         </div>
-                                        <div class="col-12 mb-30">
-                                            <label class="mb-2 label_text">Current Password</label>
-                                            <input id="myInput" placeholder="Current Password" type="password" name="old_password">
-                                             <span onclick="myFunction()" class="fa fa-eye eye_position" style="color: black;"></span>
+
+                                        <div class="col-lg-6 col-12 mb-30">
+                                            <input id="new-pwd" name="new_password" type="password" placeholder="New Password">
                                         </div>
 
                                         <div class="col-lg-6 col-12 mb-30">
-                                            <input id="new-pwd" name="new_password" type="password">
-                                        </div>
-
-                                        <div class="col-lg-6 col-12 mb-30">
-                                            <input id="confirm-pwd" name="confirm_password" type="password">
+                                            <input id="confirm-pwd" name="new_confirm_password" type="password" placeholder="Confirm Password">
                                         </div>
 
                                         <div class="col-12">

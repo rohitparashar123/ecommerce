@@ -28,6 +28,12 @@
       <!-- Google Font: Source Sans Pro -->
       <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
       <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+      <!-- Data table links -->
+      <link rel="stylesheet" href="{{asset('Admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+      <link rel="stylesheet" href="{{asset('Admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+     <!-- Google Font: Source Sans Pro -->
+     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+      <!-- data table links -->
       <!-- Toaster Notification -->
      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
       <style type="text/css">
@@ -89,7 +95,7 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
              <li>
-                <a href="{{url('admin/logout')}}" class="logout_btn"><i class="fas fa-power-off"></i> Logout</a>
+                <a href="{{url('admin/logout')}}" class="logout_btn"><i class="fas fa-power-off"></i>Logout</a>
              </li>
             </ul>
          </nav>
@@ -208,6 +214,27 @@
       <!-- AdminLTE for demo purposes -->
       <script src="{{asset('Admin/dist/js/demo.js')}}"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+      <script src="{{asset('Admin/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+      <script src="{{asset('Admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+      <script src="{{asset('Admin/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+      <script src="{{asset('Admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+       <script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
       @if(Session::has('record_added'))
       <script>
       toastr.success("{!!Session::get('record_added')!!}");

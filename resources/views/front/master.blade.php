@@ -26,7 +26,7 @@
       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
       <!-- prevent back button after logout -->
-    
+      
       <!-- prevent back button after logout -->
       
       <!-- Use the minified version files listed below for better performance and remove the files listed above -->
@@ -94,6 +94,19 @@
                 left: 0px;
            }
            }
+           .theme-default {
+    background: #f33535;
+    width: 40px;
+    height: 40px;
+    bottom: 30px;
+    right: 90px;
+    border-radius: 100%;
+    color: #fff;
+    text-align: center;
+    font-size: 22px;
+    line-height: 40px;
+    font-weight: 700;
+}
          </style>
    </head>
    <body>
@@ -868,6 +881,7 @@
             </div>
          </div>
       </div>
+    
       <!-- modals end -->
       <!--*********************** 
          all js files
@@ -882,6 +896,7 @@
       <script src="{{asset('front/assets/js/bootstrap.min.js')}}"></script>
       <script src="{{asset('front/assets/js/plugins/plugins.js')}}"></script>
       <script src="{{asset('front/assets/js/main.js')}}"></script>
+      <script src="{{ asset('front/assets/js/push.min.js') }}"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
       @if(Session::has('do_login'))
       <script> 
@@ -925,5 +940,65 @@
   }
 
          </script>
+
+         <!-- push notifications -->
+       <!--   <script>
+    let loggedInUser =@json(\Illuminate\Support\Facades\Auth::user());
+    let loginUrl = '{{ url('/login_page') }}';
+    const iconPath = '{{ asset('../images/main_logo2-1.png') }}';
+    // Loading button plugin (removed from BS4)
+    (function ($) {
+        $.fn.button = function (action) {
+            if (action === 'loading' && this.data('loading-text')) {
+                this.data('original-text', this.html()).html(this.data('loading-text')).prop('disabled', true);
+            }
+            if (action === 'reset' && this.data('original-text')) {
+                this.html(this.data('original-text')).prop('disabled', false);
+            }
+        };
+    }(jQuery));
+    Push.create("Hello Rohit!",{
+       body: "Welcome to the FoodBuddy.",
+       timeout: 5000,
+       icon: iconPath,
+    });
+</script> -->
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/60a3e36a185beb22b30e6e34/1f6030ml1';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+  <!-- Messenger Chat plugin Code -->
+    <div id="fb-root"></div>
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            xfbml            : true,
+            version          : 'v10.0'
+          });
+        };
+
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+      </script>
+
+      <!-- Your Chat plugin code -->
+      <div class="fb-customerchat"
+        attribution="biz_inbox"
+        page_id="106436151633653">
+      </div>
    </body>
 </html>

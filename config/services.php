@@ -50,5 +50,4 @@ return [
         'channel' => env('PAYTM_CHANNEL'),
         'industry_type' => env('PAYTM_INDUSTRY_TYPE'),
     ],
-
 ];

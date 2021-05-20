@@ -16,7 +16,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','google_id','facebook_id',
+        'name', 'email', 'password','phone','google_id','facebook_id','device_token',
     ];
 
     /**
@@ -36,4 +36,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+     public function routeNotificationForNexmo($notification)
+    {
+        return $this->phone;
+    }
 }

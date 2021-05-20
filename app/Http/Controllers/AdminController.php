@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Admin;
 use Illuminate\Http\Request;
-
+use App\User;
+use DB;
+use Session;
 
 class AdminController extends Controller
 {
