@@ -165,7 +165,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
          Intervention\Image\ImageServiceProvider::class,
         /*sweet alert class */
-
+        Monarobase\CountryList\CountryListServiceProvider::class,
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
 
         /*
@@ -236,6 +236,7 @@ return [
         'PDF' => \Barryvdh\DomPDF\Facade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Countries' => Monarobase\CountryList\CountryListFacade::class,
 
     ],
 

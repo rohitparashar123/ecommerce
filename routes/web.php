@@ -139,6 +139,7 @@ Route::get('/cart/delete/{id}','FrontController@deletecart');
 //PRODUCT DETAIL PAGE ROUTE
 Route::get('productdetail/{id}','FrontController@productdetail');
 
+Route::get('/search', 'FrontController@search')->name('search');
 //CONTACT US PAGE
 Route::get('/contact-us','FrontController@contactus');
 

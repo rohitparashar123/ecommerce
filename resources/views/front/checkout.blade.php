@@ -126,9 +126,11 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3">Country</label>
                                                 <div class="col-md-6">
-                                                    <select class="form-control" name="country">
+                                                        <select name="country" id="country" class="form-control">
                                                         <option>-- please choose --</option>
-                                                        <option>United States</option>
+                                                         @foreach ($countries as $country)
+                                                         <option value="{{ $country }}">{{ $country }}</option>
+                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>

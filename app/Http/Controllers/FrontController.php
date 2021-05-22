@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Monarobase\CountryList\CountryListFacade;
 use App\Banner;
 use App\Category;
 use App\Product;
@@ -12,63 +13,12 @@ use DB;
 use App\Order;
 use App\OrderProduct;
 use PDF;
-
+use App\SMS;
 
 
 class FrontController extends Controller
 {
-	// sms send code
-	function sms($mob,$msg)
-{
-  
-$username = urlencode("u4017"); 
-$msg_token = urlencode("vNYI8c"); 
-$sender_id = urlencode("HMLBTM"); // optional (compulsory in transactional sms) 
-$message = urlencode("$msg"); 
-$mobile = urlencode("$mob"); 
-
-$url = " https://www.fast2sms.com/dev/wallet?authorization=GspAPXy1tSedvYQhFi4kanOHzMVmEcblo2xW3NrKLBugTZRj700WEiwDCOJxjUBm1M5zrQAlL2Gvct4a".$username."&msg_token=".$msg_token."&sender_id=".$sender_id."&message=".$msg."&mobile=".$mobile.""; 
-
-
-//API URL
-//$url="http://sms.globehost.com/api/sendhttp.php";
-$postData=json_enco(array(
-$username = urlencode("u4017"), 
-$msg_token = urlencode("vNYI8c"), 
-$sender_id = urlencode("HMLBTM"), // optional (compulsory in transactional sms) 
-$message = urlencode("$msg"),
-$mobile = urlencode("$mob")));
-// init the resource
-$ch = curl_init();
-curl_setopt_array($ch, array(
-    CURLOPT_URL => $url,
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_POST => true,
-    CURLOPT_POSTFIELDS => $postData
-    //,CURLOPT_FOLLOWLOCATION => true
-));
-
-
-
-//Ignore SSL certificate verification
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-
-
-//get response
-$output = curl_exec($ch);
-
-//Print error if any
-if(curl_errno($ch))
-{
-    echo 'error:' . curl_error($ch);
-}
-
-curl_close($ch);
-return 1;
-}
-	//sms code send end
-
+	
 
 public function index()
     { 
@@ -146,7 +96,8 @@ public function checkout(){
 	$useremail= Auth::User()->email; 
 	$data= Cart::where('user_email',$useremail)->get();
 	$a= Cart::where('user_email',$useremail)->get();
-	return view('front.checkout',compact('data','a'));
+	$countries = CountryListFacade::getList('en');
+	return view('front.checkout',compact('data','a','countries'));
 
     }
 	else
@@ -576,9 +527,12 @@ public function handlePaytmRequest( $order_id, $grand_total ) {
 			$order->order_status = 'complete';
 			$order->transaction_id = $transaction_id;
 			$order->save();
-		   
+		    $data = Order::where('order_id',$order_id)->get();
 			// $useremail=Auth::user()->email;
 	  //       DB::table('carts')->where('user_email',$useremail)->delete();
+            $message="Hii rohit welcome to our services foodbuddy.com";
+            $mobile = "9340821225";
+            SMS::sendSMS($message,$mobile);
 
 			return view( 'front.order-complete', compact( 'order') );
 
@@ -624,4 +578,5 @@ public function pdf(){
 	return $pdf->download('Order-details.pdf');
 	}
 
+	
 }
